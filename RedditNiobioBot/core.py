@@ -140,10 +140,10 @@ class RedditBot:
                     self._logger.info('Replied to comment base36_id: {}'.format(comment.base36_id))
                     # timer temporario, por ser uma conta nova devo limitar os comentários entre 9m.
                     time.sleep(60 * 10)
-                self._db.session.commit()
-                time.sleep(5)
             except Exception as e:
                 comment.status = 'ERROR'
                 self._db.session.commit()
                 self._logger.error('Something went wrong!')
                 self._logger.error(e)
+            self._db.session.commit()
+            time.sleep(5)
