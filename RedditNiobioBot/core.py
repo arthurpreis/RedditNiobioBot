@@ -88,7 +88,8 @@ class RedditBot:
 
                     if comment.body.lower().startswith(tuple(commands)):
                         if comment.author and parent.author:
-                            if comment.author != parent.author:
+                            if comment.author != parent.author
+                            and parent.author != self._reddit.user.me():
 
                                 self._logger.info('Comment base36_id: {} matches command.'.format(comment.id))
 
