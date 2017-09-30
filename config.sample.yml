@@ -1,0 +1,18 @@
+bot:
+  subreddits: ['brasil']
+  commands: ['!redditniobio', '!redditnióbio']
+ 
+reddit:
+  client_id: ''
+  client_secret: ''
+  username: ''
+  password: ''
+  user_agent: ''
+
+database:
+  driver: 'mysql'
+  username: ''
+  password: ''
+  host: ''
+  port: '3306'
+  database: ''
