@@ -5,7 +5,7 @@ import logging
 from praw import Reddit
 from .database import Database
 from .helpers import render_template
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
 
 class RedditBot:
@@ -112,6 +112,9 @@ class RedditBot:
 
                                     except IntegrityError:
                                         self._logger.info('Already added to database!')
+                                        self._db.session.rollback()
+                                    except SQLAlchemyError:
+                                        self._logger.info('Something went wrong with your database, rolling back!')
                                         self._db.session.rollback()
 
             except Exception as e:
