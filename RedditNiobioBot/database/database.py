@@ -21,7 +21,8 @@ class Database:
         url = ('{driver}://{username}:{password}@'
                '{host}:{port}/{database}?charset=utf8')
         engine = create_engine(url.format(**self.__dict__),
-                               encoding='utf-8')
+                               encoding='utf-8',
+                               pool_recycle=1)
         self.engine = engine
 
     def _create_tables(self):
