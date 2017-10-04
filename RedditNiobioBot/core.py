@@ -15,7 +15,8 @@ class RedditBot:
         self.mode = mode
 
         self._setup_logging()
-        self._logger.info('The Bot is now starting')
+        self._logger.info('The Bot is now starting in {} mode.'
+                          .format(self.mode))
         self._load_config()
         self._setup_database()
         self._setup_reddit()
@@ -81,7 +82,8 @@ class RedditBot:
         while True:
             try:
                 for comment in subreddits.stream.comments():
-                    self._logger.info('Comment base36_id found: {}.'.format(comment.id))
+                    self._logger.info('Comment base36_id found: {}.'
+                                      .format(comment.id))
                     parent = comment.parent()
 
                     commands = self._config['bot']['commands']
@@ -91,7 +93,8 @@ class RedditBot:
                             if comment.author != parent.author \
                             and parent.author != self._reddit.user.me():
 
-                                self._logger.info('Comment base36_id: {} matches command.'.format(comment.id))
+                                self._logger.info('Comment base36_id: {} matches command.'
+                                                  .format(comment.id))
 
                                 from_user = self._db.get_or_add_user(username=comment.author)
                                 to_user = self._db.get_or_add_user(username=parent.author)
@@ -131,13 +134,15 @@ class RedditBot:
             comments = self._db.get_comments(status='TO_REPLY')
             try:
                 for comment in comments:
-                    self._logger.info('Replying to comment base36_id: {}'.format(comment.base36_id))
+                    self._logger.info('Replying to comment base36_id: {}'
+                                      .format(comment.base36_id))
                     reddit_comment = self._reddit.comment(id=comment.base36_id)
                     render = render_template('default.md', comment=comment)
                     reddit_comment.reply(render)
                     comment.status = 'DONE'
                     self._db.session.commit()
-                    self._logger.info('Replied to comment base36_id: {}'.format(comment.base36_id))
+                    self._logger.info('Replied to comment base36_id: {}'
+                                      .format(comment.base36_id))
                     # timer temporario, por ser uma conta nova devo limitar os comentários entre 9m.
                     time.sleep(60 * 10)
             except Exception as e:
