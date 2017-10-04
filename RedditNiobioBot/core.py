@@ -12,14 +12,14 @@ class RedditBot:
 
     def __init__(self, mode='watch'):
 
-        self.mode = mode
+        self._mode = mode
 
         # Configura e inicia banco de dados, reddit e etc...
         # assim que o objeto Redditbot foi instanciado.
 
         self._setup_logging()
         self._logger.info('The Bot is now starting in {} mode.'
-                          .format(self.mode))
+                          .format(self._mode))
         self._load_config()
         self._setup_database()
         self._setup_reddit()
@@ -32,19 +32,18 @@ class RedditBot:
         if not os.path.exists('logs'):
             os.makedirs('logs')
 
-        logger = logging.getLogger(__name__)
+        self._logger = logging.getLogger(__name__)
         formatter = logging.Formatter('%(asctime)s '
                                       '[%(levelname)s] '
                                       '%(message)s')
-        logger.setLevel(logging.INFO)
+        self._logger.setLevel(logging.INFO)
         ch = logging.StreamHandler()
         fh = logging.FileHandler('logs/{}.log'
-                                 .format(self.mode))
+                                 .format(self._mode))
         ch.setFormatter(formatter)
         fh.setFormatter(formatter)
-        logger.addHandler(ch)
-        logger.addHandler(fh)
-        self._logger = logger
+        self._logger.addHandler(ch)
+        self._logger.addHandler(fh)
 
     # Carrega o arquivo de configuração, qualquer erro
     # logga e raise a exception
