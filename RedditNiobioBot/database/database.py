@@ -4,6 +4,7 @@ from .models import Base, User, Comment
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 
 
+# Prepara e executa algumas funções no db
 class Database:
     def __init__(self, driver, username, password, host, port, database):
         self.driver = driver
@@ -13,6 +14,7 @@ class Database:
         self.port = port
         self.database = database
 
+        # Configura o db assim que o objeto for instanciado
         self._connect()
         self._create_tables()
         self._make_session()
@@ -25,6 +27,7 @@ class Database:
                                pool_recycle=1)
         self.engine = engine
 
+    # Cria as tabelas no db caso não existam
     def _create_tables(self):
         Base.metadata.create_all(self.engine)
 
