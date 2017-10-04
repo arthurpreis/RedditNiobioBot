@@ -1,7 +1,13 @@
 bot:
   subreddits: ['brasil']
+  # escreva os comandos apenas em letras minúsculas.
   commands: ['!redditniobio', '!redditnióbio']
  
+  # Crie uma conta e vá para https://www.reddit.com/prefs/apps/
+  # clique no botão 'create app' ou 'create another app'
+  # marque 'script', prencha no mínimo o campo Nome e redirect url
+  # em redirect url ponha https://127.0.0.1 e clique em 'create app'
+  # Copie as informações e preencha a configuração abaixo.
 reddit:
   client_id: ''
   client_secret: ''
@@ -9,6 +15,8 @@ reddit:
   password: ''
   user_agent: ''
 
+  # Caso use outro banco de dados que não seja MySQL,
+  # instale o driver necessário.
 database:
   driver: 'mysql'
   username: ''
