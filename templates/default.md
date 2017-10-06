@@ -1,4 +1,4 @@
-###[/u/{{ comment.to_user.username }} aqui está o seu RedditNióbio!](https://i.imgur.com/55fMDFL.jpg)  
+###[/u/{{ comment.to_user.username }} aqui está o seu RedditNióbio!](https://i.imgur.com/79JjOus.png)  
 ***  
 {% if comment.to_user.points <= 1 %}
 /u/{{ comment.to_user.username }} ganhou um RedditNióbio pela primeira vez! (Recebido de: /u/{{ comment.from_user.username }})  
